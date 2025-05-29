@@ -13,11 +13,15 @@ public class Personaje : MonoBehaviour
     private int saltosRestantes;
     private bool estabaEnSuelo;
 
+    private Animator animator;
+
+
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         saltosRestantes = saltosMaximos;
+        animator= GetComponent<Animator>();
     }
 
     void Update()
@@ -59,6 +63,16 @@ public class Personaje : MonoBehaviour
     void ProcesarMovimiento()
     {
         float inputMovimiento = Input.GetAxis("Horizontal");
+
+        if(inputMovimiento != 0f)
+        {
+            animator.SetBool("isRunning",true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+
         rigidbody2D.linearVelocity = new Vector2(inputMovimiento * velocidad, rigidbody2D.linearVelocity.y);
         GestionarOrientacion(inputMovimiento);
     }
