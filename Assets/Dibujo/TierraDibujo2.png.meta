@@ -1,0 +1,385 @@
+fileFormatVersion: 2
+guid: 89aa444c52f28c246a1d4e871fc7e5bf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7903811246042943531
+    second: TierraDibujo2_0
+  - first:
+      213: 2115877277519302247
+    second: TierraDibujo2_1
+  - first:
+      213: -8595786498309352495
+    second: TierraDibujo2_2
+  - first:
+      213: -6415545695533200596
+    second: TierraDibujo2_3
+  - first:
+      213: 8340904631851293243
+    second: TierraDibujo2_4
+  - first:
+      213: 4904317525062716911
+    second: TierraDibujo2_5
+  - first:
+      213: -5133157605521919516
+    second: TierraDibujo2_6
+  - first:
+      213: -6962302377477529753
+    second: TierraDibujo2_7
+  - first:
+      213: -6520341711130063942
+    second: TierraDibujo2_8
+  - first:
+      213: 5951282191855418590
+    second: TierraDibujo2_9
+  - first:
+      213: 5494035022139245341
+    second: TierraDibujo2_10
+  - first:
+      213: -5226053258018639863
+    second: TierraDibujo2_11
+  - first:
+      213: 5601614247481557658
+    second: TierraDibujo2_12
+  - first:
+      213: -8897326962861056066
+    second: TierraDibujo2_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TierraDibujo2_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 166
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20902cb37affad60800000000000000
+      internalID: 7903811246042943531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 166
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ecbda6c2b1d5d10800000000000000
+      internalID: 2115877277519302247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 166
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d31c23e8b1a5b880800000000000000
+      internalID: -8595786498309352495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_4
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 133
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3a18e61298d0c370800000000000000
+      internalID: 8340904631851293243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_5
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 133
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed061b0ec2af0440800000000000000
+      internalID: 4904317525062716911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_6
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 133
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e175caba5c53c8b0800000000000000
+      internalID: -5133157605521919516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 100
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76f189320eee06f90800000000000000
+      internalID: -6962302377477529753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_8
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 100
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb0eed82c71385a0800000000000000
+      internalID: -6520341711130063942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TierraDibujo2_9
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 100
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edc76ab4f93379250800000000000000
+      internalID: 5951282191855418590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b13efd05cf4c7ef46bb619fb5a20a20f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TierraDibujo2_0: 7903811246042943531
+      TierraDibujo2_1: 2115877277519302247
+      TierraDibujo2_10: 5494035022139245341
+      TierraDibujo2_11: -5226053258018639863
+      TierraDibujo2_12: 5601614247481557658
+      TierraDibujo2_13: -8897326962861056066
+      TierraDibujo2_14: 1803432176
+      TierraDibujo2_2: -8595786498309352495
+      TierraDibujo2_3: -6415545695533200596
+      TierraDibujo2_4: 8340904631851293243
+      TierraDibujo2_5: 4904317525062716911
+      TierraDibujo2_6: -5133157605521919516
+      TierraDibujo2_7: -6962302377477529753
+      TierraDibujo2_8: -6520341711130063942
+      TierraDibujo2_9: 5951282191855418590
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
