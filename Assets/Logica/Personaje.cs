@@ -12,22 +12,22 @@ public class Personaje : MonoBehaviour
     private bool mirandoDerecha = true;
     private int saltosRestantes;
     private bool estabaEnSuelo;
-
     private Animator animator;
-
 
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         saltosRestantes = saltosMaximos;
-        animator= GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        ProcesarMovimiento();
-        ProcesarSalto();
+        bool enSuelo = EstaEnSuelo(); // lo calculamos una sola vez por eficiencia
+        ProcesarMovimiento(enSuelo);
+        ProcesarSalto(enSuelo);
+        ActualizarAnimaciones(enSuelo);
     }
 
     bool EstaEnSuelo()
@@ -43,9 +43,8 @@ public class Personaje : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    void ProcesarSalto()
+    void ProcesarSalto(bool enSuelo)
     {
-        bool enSuelo = EstaEnSuelo();
         if (enSuelo && !estabaEnSuelo)
         {
             saltosRestantes = saltosMaximos;
@@ -55,23 +54,17 @@ public class Personaje : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes > 0)
         {
             saltosRestantes--;
-            rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, 0f); // Resetear velocidad vertical
+            rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, 0f);
             rigidbody2D.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
         }
     }
 
-    void ProcesarMovimiento()
+    void ProcesarMovimiento(bool enSuelo)
     {
         float inputMovimiento = Input.GetAxis("Horizontal");
 
-        if(inputMovimiento != 0f)
-        {
-            animator.SetBool("isRunning",true);
-        }
-        else
-        {
-            animator.SetBool("isRunning", false);
-        }
+        // Solo activar animaci�n de caminar si est� en el suelo
+        animator.SetBool("isRunning", inputMovimiento != 0f && enSuelo);
 
         rigidbody2D.linearVelocity = new Vector2(inputMovimiento * velocidad, rigidbody2D.linearVelocity.y);
         GestionarOrientacion(inputMovimiento);
@@ -84,5 +77,14 @@ public class Personaje : MonoBehaviour
             mirandoDerecha = !mirandoDerecha;
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
+    }
+
+    void ActualizarAnimaciones(bool enSuelo)
+    {
+        float velocidadY = rigidbody2D.linearVelocity.y;
+
+        // Detectar si est� subiendo o bajando
+        animator.SetBool("isJumping", !enSuelo && velocidadY > 0.1f);
+        animator.SetBool("isFalling", !enSuelo && velocidadY < -0.1f);
     }
 }
