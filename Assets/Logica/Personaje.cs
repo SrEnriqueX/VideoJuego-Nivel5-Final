@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class Personaje : MonoBehaviour
 {
     public float velocidad;
     public float fuerzaSalto;
+    public float fuerzaRebote=3f;
     public int saltosMaximos;
     public LayerMask capaSuelo;
 
@@ -12,6 +14,8 @@ public class Personaje : MonoBehaviour
     private bool mirandoDerecha = true;
     private int saltosRestantes;
     private bool estabaEnSuelo;
+    private bool atacando;
+    private bool recibiendoDanio;
     private Animator animator;
 
     void Start()
@@ -24,10 +28,13 @@ public class Personaje : MonoBehaviour
 
     void Update()
     {
-        bool enSuelo = EstaEnSuelo(); // lo calculamos una sola vez por eficiencia
+        bool enSuelo = EstaEnSuelo(); 
         ProcesarMovimiento(enSuelo);
         ProcesarSalto(enSuelo);
         ActualizarAnimaciones(enSuelo);
+        procesarAtaque(enSuelo);
+        //animator.SetBool("IsAttack", atacando);
+        animator.SetBool("IsDamage",recibiendoDanio);
     }
 
     bool EstaEnSuelo()
@@ -51,7 +58,7 @@ public class Personaje : MonoBehaviour
         }
         estabaEnSuelo = enSuelo;
 
-        if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes > 0 && !recibiendoDanio)
         {
             saltosRestantes--;
             rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, 0f);
@@ -61,15 +68,21 @@ public class Personaje : MonoBehaviour
 
     void ProcesarMovimiento(bool enSuelo)
     {
-        float inputMovimiento = Input.GetAxis("Horizontal");
+        // Solo mover si no está atacando
+        if (!atacando && !recibiendoDanio)
+        {
+            float inputMovimiento = Input.GetAxis("Horizontal");
+            animator.SetBool("isRunning", inputMovimiento != 0f && enSuelo);
+            rigidbody2D.linearVelocity = new Vector2(inputMovimiento * velocidad, rigidbody2D.linearVelocity.y);
+            GestionarOrientacion(inputMovimiento);
+        }
+        else if (atacando)
+        {
+            rigidbody2D.linearVelocity = new Vector2(0, rigidbody2D.linearVelocity.y);
+        }
 
-        // Solo activar animaci�n de caminar si est� en el suelo
-        animator.SetBool("isRunning", inputMovimiento != 0f && enSuelo);
-
-        rigidbody2D.linearVelocity = new Vector2(inputMovimiento * velocidad, rigidbody2D.linearVelocity.y);
-        GestionarOrientacion(inputMovimiento);
+        animator.SetBool("IsAttack", atacando);
     }
-
     void GestionarOrientacion(float inputMovimiento)
     {
         if ((mirandoDerecha && inputMovimiento < 0) || (!mirandoDerecha && inputMovimiento > 0))
@@ -81,10 +94,60 @@ public class Personaje : MonoBehaviour
 
     void ActualizarAnimaciones(bool enSuelo)
     {
-        float velocidadY = rigidbody2D.linearVelocity.y;
+        if (recibiendoDanio)
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
+            animator.SetBool("isRunning", false);
+            return; // Ignorar otras animaciones
+        }
 
-        // Detectar si est� subiendo o bajando
+        float velocidadY = rigidbody2D.linearVelocity.y;
         animator.SetBool("isJumping", !enSuelo && velocidadY > 0.1f);
         animator.SetBool("isFalling", !enSuelo && velocidadY < -0.1f);
     }
+    public void procesarAtaque(bool enSuelo) 
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !atacando && enSuelo)
+        {
+            Atacando();
+        }
+    }
+    public void Atacando()
+    {
+        atacando = true;
+    }
+    public void DesactivaAtaque()
+    {
+        atacando = false;
+    }
+    public void RecibeDanio(Vector2 direccion, int cantidadDanio)
+    {
+        if (!recibiendoDanio)
+        {
+            recibiendoDanio = true;
+            atacando = false; // por si está atacando, cancelar
+
+            // Calcular dirección de retroceso (hacia la izquierda o derecha)
+            float direccionX = Mathf.Sign(transform.position.x - direccion.x);
+            Vector2 rebote = new Vector2(direccionX, 0.5f).normalized;
+
+            // Cancelar velocidad previa y aplicar rebote
+            rigidbody2D.linearVelocity = Vector2.zero;
+            rigidbody2D.AddForce(rebote * fuerzaRebote, ForceMode2D.Impulse);
+
+            // Iniciar corrutina para desactivar estado de daño
+            StartCoroutine(DesactivaDanio());
+        }
+    }
+
+    IEnumerator DesactivaDanio()
+    {
+        yield return new WaitForSeconds(0.4f);
+        recibiendoDanio = false;
+
+        // Detener movimiento al terminar retroceso
+        rigidbody2D.linearVelocity = Vector2.zero;
+    }
+
 }
