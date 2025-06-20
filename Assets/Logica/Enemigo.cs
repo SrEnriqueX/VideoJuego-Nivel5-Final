@@ -10,15 +10,25 @@ public class Enemigo : MonoBehaviour
     private bool recibiendoDanio;
     private Rigidbody2D rigidbody2d;
     private Vector2 movimiento;
+    private bool jugadorVivo;
     void Start()
     {
+        jugadorVivo=true;
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    
+
     void Update()
     {
-        float distanciaDelJugador= Vector2.Distance(transform.position, jugador.position);
+        if (jugadorVivo)
+        {
+            Movimiento();
+        }
+
+    }
+    private void Movimiento()
+    {
+        float distanciaDelJugador = Vector2.Distance(transform.position, jugador.position);
         if (distanciaDelJugador < detectarRadio)
         {
             Vector2 direccion = (jugador.position - transform.position).normalized;
@@ -26,20 +36,22 @@ public class Enemigo : MonoBehaviour
         }
         else
         {
-            movimiento=Vector2.zero;
+            movimiento = Vector2.zero;
         }
         if (!recibiendoDanio)
         {
             rigidbody2d.MovePosition(rigidbody2d.position + movimiento * velocidad * Time.deltaTime);
         }
-        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Vector2 direccionDanio = new Vector2(transform.position.x, 0);
-            collision.gameObject.GetComponent<Personaje>().RecibeDanio(direccionDanio,1);
+            Personaje personaje = collision.gameObject.GetComponent<Personaje>();
+            personaje.RecibeDanio(direccionDanio,1);
+            jugadorVivo = !personaje.muerto;
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -410,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 309540169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.881, y: -0.938, z: 0}
+  m_LocalPosition: {x: -2.984, y: -0.891, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -478,10 +478,12 @@ MonoBehaviour:
   velocidad: 2.5
   fuerzaSalto: 4
   fuerzaRebote: 4
+  vida: 3
   saltosMaximos: 2
   capaSuelo:
     serializedVersion: 2
     m_Bits: 64
+  muerto: 0
 --- !u!95 &309540175
 Animator:
   serializedVersion: 7

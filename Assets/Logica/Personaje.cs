@@ -6,6 +6,7 @@ public class Personaje : MonoBehaviour
     public float velocidad;
     public float fuerzaSalto;
     public float fuerzaRebote=3f;
+    public int vida = 3;
     public int saltosMaximos;
     public LayerMask capaSuelo;
 
@@ -16,6 +17,7 @@ public class Personaje : MonoBehaviour
     private bool estabaEnSuelo;
     private bool atacando;
     private bool recibiendoDanio;
+    public bool muerto;
     private Animator animator;
 
     void Start()
@@ -28,13 +30,19 @@ public class Personaje : MonoBehaviour
 
     void Update()
     {
-        bool enSuelo = EstaEnSuelo(); 
-        ProcesarMovimiento(enSuelo);
-        ProcesarSalto(enSuelo);
-        ActualizarAnimaciones(enSuelo);
-        procesarAtaque(enSuelo);
+        bool enSuelo = EstaEnSuelo();
+
+        if (!muerto)
+        {
+            ProcesarMovimiento(enSuelo);
+            ProcesarSalto(enSuelo);
+            ActualizarAnimaciones(enSuelo);
+            procesarAtaque(enSuelo);
+        }
+        
         //animator.SetBool("IsAttack", atacando);
         animator.SetBool("IsDamage",recibiendoDanio);
+        animator.SetBool("IsDie", muerto);
     }
 
     bool EstaEnSuelo()
@@ -127,14 +135,23 @@ public class Personaje : MonoBehaviour
         {
             recibiendoDanio = true;
             atacando = false; // por si está atacando, cancelar
+            vida-=cantidadDanio;
+            if (vida<=0)
+            { 
+                muerto = true;
+            }
 
-            // Calcular dirección de retroceso (hacia la izquierda o derecha)
-            float direccionX = Mathf.Sign(transform.position.x - direccion.x);
-            Vector2 rebote = new Vector2(direccionX, 0.5f).normalized;
+            if (!muerto)
+            {
+                // Calcular dirección de retroceso (hacia la izquierda o derecha)
+                float direccionX = Mathf.Sign(transform.position.x - direccion.x);
+                Vector2 rebote = new Vector2(direccionX, 0.5f).normalized;
 
-            // Cancelar velocidad previa y aplicar rebote
-            rigidbody2D.linearVelocity = Vector2.zero;
-            rigidbody2D.AddForce(rebote * fuerzaRebote, ForceMode2D.Impulse);
+                // Cancelar velocidad previa y aplicar rebote
+                rigidbody2D.linearVelocity = Vector2.zero;
+                rigidbody2D.AddForce(rebote * fuerzaRebote, ForceMode2D.Impulse);
+            }
+            
 
             // Iniciar corrutina para desactivar estado de daño
             StartCoroutine(DesactivaDanio());
