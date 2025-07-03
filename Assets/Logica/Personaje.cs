@@ -26,6 +26,8 @@ public class Personaje : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip sonidoSalto1;
     public AudioClip sonidoSalto2;
+    public AudioClip sonidoAtaque;
+
 
 
     void Start()
@@ -147,6 +149,8 @@ public class Personaje : MonoBehaviour
     public void Atacando()
     {
         atacando = true;
+        audioSource.PlayOneShot(sonidoAtaque);
+
     }
     public void DesactivaAtaque()
     {

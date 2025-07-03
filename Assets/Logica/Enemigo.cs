@@ -26,6 +26,7 @@ public class Enemigo : MonoBehaviour
 
     public AudioClip sonidoDanio;
     private AudioSource audioSource;
+    public AudioClip sonidoAtaque;
 
     void Start()
     {
@@ -115,6 +116,11 @@ public class Enemigo : MonoBehaviour
 
             if (distanciaDelJugador <= distanciaAtaque)
             {
+                if (!animador.GetBool("IsAttack")) // Solo reproducir una vez al iniciar el ataque
+                {
+                    audioSource.PlayOneShot(sonidoAtaque);
+                }
+
                 animador.SetBool("IsAttack", true);
                 animador.SetBool("IsRunning", false);
                 movimiento = Vector2.zero;

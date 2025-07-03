@@ -960,6 +960,7 @@ MonoBehaviour:
   sonidoDanio: {fileID: 8300000, guid: 13a5887b9a9b9b74fa37fd3dc28a6993, type: 3}
   sonidoSalto1: {fileID: 8300000, guid: 0b725e3181e904a4c8998919a38b7a39, type: 3}
   sonidoSalto2: {fileID: 8300000, guid: f93f018b8956ae14b88ba6f4f9546787, type: 3}
+  sonidoAtaque: {fileID: 8300000, guid: 3cd2fac16dec3dd45a71717fd02fa414, type: 3}
 --- !u!95 &309540175
 Animator:
   serializedVersion: 7
@@ -2716,6 +2717,7 @@ MonoBehaviour:
   vida: 100
   panelYouWin: {fileID: 1628025903}
   sonidoDanio: {fileID: 8300000, guid: 13a5887b9a9b9b74fa37fd3dc28a6993, type: 3}
+  sonidoAtaque: {fileID: 8300000, guid: 3cd2fac16dec3dd45a71717fd02fa414, type: 3}
 --- !u!61 &1880296526
 BoxCollider2D:
   m_ObjectHideFlags: 0
