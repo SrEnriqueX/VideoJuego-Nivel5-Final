@@ -116,12 +116,12 @@ TextureImporter:
       name: PjAtahualpaMuerte4_0
       rect:
         serializedVersion: 2
-        x: 12
+        x: 11
         y: 8
-        width: 19
+        width: 20
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

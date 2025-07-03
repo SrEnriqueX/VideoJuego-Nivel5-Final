@@ -19,6 +19,14 @@ public class Personaje : MonoBehaviour
     private bool recibiendoDanio;
     public bool muerto;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private Color colorOriginal;
+    public GameObject panelGameOver;
+    public AudioClip sonidoDanio;
+    private AudioSource audioSource;
+    public AudioClip sonidoSalto1;
+    public AudioClip sonidoSalto2;
+
 
     void Start()
     {
@@ -26,6 +34,12 @@ public class Personaje : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         saltosRestantes = saltosMaximos;
         animator = GetComponent<Animator>();
+
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        colorOriginal = spriteRenderer.color;
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -71,6 +85,15 @@ public class Personaje : MonoBehaviour
             saltosRestantes--;
             rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, 0f);
             rigidbody2D.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            
+            if (saltosRestantes == 1)
+            {
+                audioSource.PlayOneShot(sonidoSalto1);
+            }
+            else if (saltosRestantes == 0)
+            {
+                audioSource.PlayOneShot(sonidoSalto2);
+            }
         }
     }
 
@@ -136,9 +159,12 @@ public class Personaje : MonoBehaviour
             recibiendoDanio = true;
             atacando = false; // por si está atacando, cancelar
             vida-=cantidadDanio;
+            
             if (vida<=0)
             { 
                 muerto = true;
+                panelGameOver.SetActive(true);
+                StartCoroutine(PausarJuegoTrasMuerte());
             }
 
             if (!muerto)
@@ -151,11 +177,17 @@ public class Personaje : MonoBehaviour
                 rigidbody2D.linearVelocity = Vector2.zero;
                 rigidbody2D.AddForce(rebote * fuerzaRebote, ForceMode2D.Impulse);
             }
-            
-
+            audioSource.PlayOneShot(sonidoDanio);
             // Iniciar corrutina para desactivar estado de daño
             StartCoroutine(DesactivaDanio());
         }
+    }
+
+    IEnumerator PausarJuegoTrasMuerte()
+    {
+        // Espera 1.5 segundos para que la animación de muerte se reproduzca
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 0f;
     }
 
     IEnumerator DesactivaDanio()
@@ -166,5 +198,55 @@ public class Personaje : MonoBehaviour
         // Detener movimiento al terminar retroceso
         rigidbody2D.linearVelocity = Vector2.zero;
     }
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EspadaEnemigo") && !recibiendoDanio && !muerto)
+        {
+            Vector2 direccionDanio = new Vector2(collision.transform.position.x, 0);
+            RecibeDanio(direccionDanio, 25);
+        }
+        if (collision.CompareTag("corazon") && !muerto)
+        {
+            if (vida < 100)
+            {
+                vida += 10;
+                if (vida > 100) vida = 100;
+                StartCoroutine(CambiarColorTemporal());
+                Destroy(collision.gameObject); 
+            }
+        }   
+    }*/
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EspadaEnemigo") && !recibiendoDanio && !muerto)
+        {
+            Enemigo enemigo = collision.GetComponentInParent<Enemigo>();
+            if (enemigo != null)
+            {
+                int dano = enemigo.ObtenerDanoActual(); // Dinámico: 25 o 45
+                Vector2 direccionDanio = new Vector2(collision.transform.position.x, 0);
+                RecibeDanio(direccionDanio, dano);
+            }
+        }
+
+        if (collision.CompareTag("corazon") && !muerto)
+        {
+            if (vida < 100)
+            {
+                vida += 10;
+                if (vida > 100) vida = 100;
+                StartCoroutine(CambiarColorTemporal());
+                Destroy(collision.gameObject);
+            }
+        }
+    }
+
+    IEnumerator CambiarColorTemporal()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = colorOriginal;
+    }
+
 
 }
